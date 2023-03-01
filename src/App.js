@@ -1,23 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [nome, setNome] = useState([])
+  const [search, setSearch] = useState('')
+  // const [filtrados,setFiltrados]=useState([])
+  useEffect(() => {
+  
+   fetch('https://digimon-api.vercel.app/api/digimon') 
+   .then(result => result.json())
+   .then(data =>  setNome(data))
+  
+  }, [])
+
+
+//basta criar uma variavel para realizar buscas ao inves de usar o useEffect
+  const filtrados = search.length > 0
+    ? nome.filter(repo =>repo.name.includes(search))
+    : []
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+      <input value={search} type='text' onChange={(e) => (setSearch(e.target.value))}></input>
+
+
+      {search.length > 0 ? (
+        <ul>
+          {filtrados.map((nomes,index) => (
+            <li key={index} >{nomes.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <ul>
+          {nome.map((nomes,index) => (
+            <li key={index}>{nomes.name}</li>
+          ))}
+        </ul>
+      )
+      }
+
     </div>
   );
 }
