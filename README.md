@@ -1,6 +1,7 @@
 # Criação de projeto para exemplificar busca 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto utilizando a api do Digimon https://digimon-api.vercel.app/api/digimon
+
 
 ## UseEffect
 
